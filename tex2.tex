@@ -1,0 +1,177 @@
+\documentclass[a4paper,12pt]{jarticle}
+
+%%%
+%  パッケージの宣言
+%%%
+\usepackage[dvipdfmx]{graphicx}      % パッケージ graphicx の利用宣言
+                                     % dvipdfmx は pdfファイル挿入のためのオプション
+\usepackage{amsmath}                 % パッケージ amsmath の利用宣言
+\usepackage{amssymb}                 % パッケージ amssymb の利用宣言
+\usepackage{amsthm}                  % パッケージ amsthm の利用宣言
+\usepackage{bm}                      % パッケージ bm の利用宣言
+
+%%%
+%  ページレイアウトの設定
+%%%
+\setlength{\textwidth}{15cm}         % テキストの幅を15cmに設定
+\setlength{\textheight}{24cm}        % テキストの高さを24cmに設定
+\setlength{\oddsidemargin}{0.5cm}    % 左余白を1インチ(2.54cm)+\oddsidemarginと設定
+\setlength{\topmargin}{-1.0cm}       % 上余白を1インチ(2.54cm)+\topmarginと設定
+\renewcommand{\baselinestretch}{1.2} % すべての文字サイズの行送りを1.2倍と設定
+%\pagestyle{bothstyle}                % ヘッダーに見出し，フッターにページ番号を出力
+
+%%%
+%  個人用マクロの設定
+%%%
+%\theoremstyle{definition}            % 定理環境内の英数字がイタリックでなくなる
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{remark}{註}[section]
+%
+\newcommand{\combi}[2]{{}_{#1}C_{#2}}
+\DeclareMathOperator*{\argmax}{\mathrm{arg\,max}}
+
+\begin{document}
+
+\title{LaTeX レポート課題 第2回}
+\author{横井　暉 \thanks{\texttt{pandorabox0720@keio.jp}}\\
+(61920820)}
+\date{2020年12月18日}
+%
+\maketitle
+%\thispagestyle{empty}                 % タイトルページにページ番号を付けないためのコマンド
+
+\begin{abstract}
+
+この演習では, 複雑な数式の書き方と図・表の書き方を学ぶ.
+
+\end{abstract}
+
+\section{数式の書き方（続き）}
+
+\begin{enumerate}
+
+\item 二次方程式$ax^2 + bx + c = 0$ $(a \neq 0)$ の解は,
+\[ x = \frac{ -b \pm \sqrt{b^2 - 4ac}}{2a} \]
+である.
+
+\item \textbf{(Taylorの定理）}
+$f (x)$が$a \leq x \leq b$で$n$回微分可能であるとき,\\
+\begin{align*}
+f(b) &=  f(a) + \frac{f'(a)}{1!}(b - a) + \ldots + \frac{f^{(n-1)}(a)}{(n-1)!} + \frac{f^{(n)}(c)}{n!}(b-a)^n\\
+     &= \sum_{k = 0}^{n - 1} f^{(k)}(a) \frac{(b-a)^k}{k!} + \frac{f^{(n)}(c)}{n!} (b-a)^n
+\end{align*} 
+を満たす点$c$が$a$と$b$の間に存在する.
+\item \textbf{(ガウス積分）}
+ガウス関数$y = e^{-x^2}$のグラフを書くと図$1$のようになる. また, ガウス関数について,
+\[ \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi\\} \]
+が成り立つ.
+\begin{figure}[h] \centering
+\includegraphics[width=50mm, clip]{Gauss.pdf}
+\caption{ガウス関数}\label{figure1}
+\end{figure}
+\end{enumerate}
+
+\section{フィボナッチ数列}
+フィボナッチ数列$\{f_k \}$は以下の$3$項間漸化式で定義される.
+\begin{align*} f_0 &= f_1 = 1,\\
+f_i &= f_{i-1} +f_{i-2} \,\,\text{($i \geq 2$のとき).}
+\end{align*}
+小さな$k$でのフィボナッチ数を計算してみよう. $f_0,f_1,\ldots,f_9$を（手や電卓で）計算すると, 表１が得られる.
+\begin{table}[h] \centering
+\caption{フィボナッチ数の例} 
+\vspace{0.5cm}
+\begin{tabular}{c||c|c|c|c|c}
+$k$ & $0$ & $1$ & $2$ & $3$ & $4$ \\ \hline
+$f_k$ & $1$ & $1$ & $2$ & $3$ & $5$   \\ \hline \hline
+$k$ & $5$ & $6$ & $7$ & $8$ & $9$ \\ \hline
+$f_k$ & $8$ & $13$ & $21$ & $34$ & $55$ 
+\end{tabular}
+\end{table}
+
+次に$f_k$の一般項を計算してみよう. $k \geq 1$に対して, $f_{k+1},f_{k}$を並べて書くと
+\begin{equation} 
+\begin{pmatrix} 
+f_{k+1} \\ f_k 
+\end{pmatrix} 
+= \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}
+\begin{pmatrix} f_k \\ f_{k-1} \end{pmatrix}
+\end{equation}
+という関係がある. 行列$\left( \begin{smallmatrix} 1 & 1 \\ 1 & 0 \end{smallmatrix} \right)$を$A$とおき, ($1$)を繰り返し適用すると,
+\begin{equation} 
+\begin{pmatrix} f_{k+1} \\ f_k \end{pmatrix} = A \begin{pmatrix} f_k \\ f_{k-1} \end{pmatrix} = \cdots 
+= A^k \begin{pmatrix} f_1 \\ f_0 \end{pmatrix} = A^k \begin{pmatrix} 1 \\ 1 \end{pmatrix} 
+\end{equation}
+が成り立つ. したがって$f_k$は$A^k \left( \begin{smallmatrix} 1 \\ 1 \end{smallmatrix} \right) $の第２成分と等しい.
+
+行列$A$のべき乗の計算には以下の定理2.1を利用する (\cite{k}参照).
+
+\begin{theorem} \label{thm2.1}
+$n$次正方行列$M$の固有値$\lambda_1$,$\lambda_2$, \ldots ,$\lambda_n$ が全て異なると仮定する. $\lambda_i$に関する固有ベクトルを
+$\bm{x_i}$とおき,  $\bm{x_1}$,$\bm{x_2}$, \ldots ,$\bm{x_n}$ を並べた行列を$U$とする. つまり,
+\[U = \Big[ \,\ \bm{x_1} \,\ \bm{x_2} \,\ \cdots \,\ \bm{x_n} \,\ \Big] \]
+である. このとき, $U$は正則であり,
+\[ M = U \left( \begin{array} {ccccc} 
+\lambda_1  & 0 & 0 & \cdots & 0 \\
+0 & \lambda_2 & 0 & \ddots & 0 \\
+0 & 0 & \ddots & \ddots & \vdots \\
+\vdots & \ddots & \ddots & \lambda_{n-1} & 0 \\
+0 & 0 & \cdots & 0 & \lambda_{n}  \end{array}\right) U^{-1} \]
+が成り立つ.
+\end{theorem}
+
+まず行列$A$の固有値を計算しよう. 固有多項式は,
+\[ \det (A - \lambda I ) = \lambda^2 - \lambda - 1 = 0 \]
+となる. したがって, 固有値$\lambda_1$,$\lambda_2$ ($\lambda_1 \geq \lambda_2$)は,
+\[\lambda_1 = \frac{1 + \sqrt{5}} {2}, \,\ \lambda_2 = \frac{1 - \sqrt{5}} {2} \]
+であり, 対応する固有ベクトルは
+\[ \bm{x_1} = \begin{pmatrix} 1 \\ -\lambda_2 \end{pmatrix}, \,\ \bm{x_2} = \begin{pmatrix} 1 \\ -\lambda_1 \end{pmatrix} \]
+となる. ここで,
+\[ U = \Big[ \,\ \bm{x_1} \,\ \bm{x_2} \,\ \Big] 
+= \left( \begin{array} {cc} 1 & 1 \\ -\lambda_2 & -\lambda_1 \end{array} \right) \]
+とおくと,
+\[ U^{-1} = \frac{1}{\lambda_1 - \lambda_2} \left( \begin{array} {cc}
+\lambda_1 & 1 \\ -\lambda_2 & -1 \end{array} \right)  \]
+であり, 定理2.1より,
+\[ A = U \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix} U^{-1} \]
+と書ける. $\Lambda = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix} $ とおくと,
+\begin{align*} A^k &= (U \Lambda U^{-1}) (U \Lambda U^{-1}) \cdots (U \Lambda U^{-1}) \\
+& = U \Lambda^k U^{-1} \end{align*}
+が成り立つ. (3)を(2)に代入して,
+\begin{align*} \begin{pmatrix} f_{k+1} \\ f_k \end{pmatrix}
+&= U \begin{pmatrix} \lambda_1^k & 0 \\ 0 & \lambda_2^k \end{pmatrix} U^{-1}  \begin{pmatrix} 1 \\ 1 \end{pmatrix} \\
+&= \left( \begin{array} {cc} 1 & 1 \\ -\lambda_2 & -\lambda_1 \end{array} \right)
+\begin{pmatrix} \lambda_1^k & 0 \\ 0 & \lambda_2^k \end{pmatrix}
+\frac{1}{\lambda_1 - \lambda_2} \left( \begin{array} {cc} \lambda_1 & 1 \\ -\lambda_2 & -1 \end{array} \right)
+\begin{pmatrix} 1 \\ 1 \end{pmatrix} \\
+&= \frac{1}{\lambda_1 - \lambda_2} \begin{pmatrix} \lambda_1^k & \lambda_2^k \\ -\lambda_2 \lambda_1^k & -\lambda_1 \lambda_2^k \end{pmatrix}
+\begin{pmatrix} \lambda_1 + 1 \\ -\lambda_2 - 1 \end{pmatrix} \\
+&=  \frac{1}{\lambda_1 - \lambda_2} 
+\begin{pmatrix} \lambda_1^k (\lambda_1 + 1) + \lambda_2^k ( -\lambda_2 - 1) \\ 
+-\lambda_2\lambda_1^k (\lambda_1 + 1) - \lambda_1\lambda_2^k ( -\lambda_2 - 1) \end{pmatrix} \\
+&=  \frac{1}{\lambda_1 - \lambda_2} \begin{pmatrix} \lambda_1^k ( \lambda_1 + 1) - \lambda_2^k ( \lambda_2 + 1) \\ 
+-\lambda_2 \lambda_1^k (\lambda_1 + 1) + \lambda_1 \lambda_2^k (\lambda_2 + 1) \end{pmatrix} 
+\end{align*}
+と計算できる. $\lambda_1$と$\lambda_2$が満たす関係
+
+\[ \lambda_i^2 = \lambda_i + 1\,\ (i = 1,2), \,\ \lambda_1\lambda_2 = -1, \,\ \ \lambda_1 + \lambda_2 = 1, 
+\,\ \lambda_1 - \lambda_2 = \sqrt{5} \]
+などを用いて整理すると,最終的に
+\[ f_k = \frac{1}{\sqrt{5}} ( \lambda_1^{k+1} - \lambda_2^{k+1} ) \]
+を得る.
+
+
+%%%
+%  参考文献の登録
+%%%
+%\begin{thebibliography}
+%\bibitem
+%\end{thebibliography}
+
+
+\begin{thebibliography}{9}
+\bibitem{k} 慶應義塾大学理工学部数理科学科編, 数学2・4, 2017.
+\end{thebibliography}
+
+\end{document}
+

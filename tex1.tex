@@ -1,0 +1,127 @@
+\documentclass[a4paper,12pt]{jarticle}
+
+%%%
+%  パッケージの宣言
+%%%
+\usepackage[dvipdfmx]{graphicx}      % パッケージ graphicx の利用宣言
+                                     % dvipdfmx は pdfファイル挿入のためのオプション
+\usepackage{amsmath}                 % パッケージ amsmath の利用宣言
+\usepackage{amssymb}                 % パッケージ amssymb の利用宣言
+\usepackage{amsthm}                  % パッケージ amsthm の利用宣言
+\usepackage{bm}                      % パッケージ bm の利用宣言
+
+%%%
+%  ページレイアウトの設定
+%%%
+\setlength{\textwidth}{15cm}         % テキストの幅を15cmに設定
+\setlength{\textheight}{24cm}        % テキストの高さを24cmに設定
+\setlength{\oddsidemargin}{0.5cm}    % 左余白を1インチ(2.54cm)+\oddsidemarginと設定
+\setlength{\topmargin}{-1.0cm}       % 上余白を1インチ(2.54cm)+\topmarginと設定
+\renewcommand{\baselinestretch}{1.2} % すべての文字サイズの行送りを1.2倍と設定
+%\pagestyle{bothstyle}                % ヘッダーに見出し，フッターにページ番号を出力
+
+%%%
+%  個人用マクロの設定
+%%%
+%\theoremstyle{definition}            % 定理環境内の英数字がイタリックでなくなる
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{remark}{註}[section]
+%
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+
+\title{LaTex レポート課題　第１回
+}
+\author{横井　暉\thanks{\texttt{pandorabox0720@keio.jp}}\\(61920820)}
+\date{2020 年 12 月 11 日}
+%
+\maketitle
+%\thispagestyle{empty}                 % タイトルページにページ番号を付けないためのコマンド
+
+\begin{abstract}
+LaTex の使い方を学ぶ演習である. 今回は文章の書き方と簡単な数式の書き方を学ぶ.
+\end{abstract}
+
+\section{AIの軍事利用}
+近年, 様々な分野でAIが応用されている. AIの開発は \textbf{「人工知能の父」}{\Huge Marvin Minsky} によって始められ, 今ではAIの軍事利用も行われている.
+軍事大国・米国の軍事予算は単独でその他の全ての国の軍事予算の合計とほぼ等しく, 米国はAIの軍事利用を最も熱心に進める国の一つである. 2014年に発表された米国の\textbf{「第３次オフセット戦略」}は, 今後AIの軍事利用に力点を置くことを宣言したものであり, またロシアの{\tiny プーチン大統領}は「AIの研究開発で最も成功した国が\underline{世界の覇権を握る}」という趣旨の発言をしており, ますますこの分野での競争が加熱することは明白だ.
+
+しかし, AIの軍事利用には大きなハードルがあり, その最たるものが倫理的な問題だ. AIを兵器に利用する際, 攻撃の意思決定にどの程度人間が関与するかということが問題になってくる. その観点から, 兵器は(1)完全に人間の統制下にあるもの, (2)攻撃の最終意思決定は人間が行い, それ以外は機械が行う「半自律型」, (3)機械が目標視認から攻撃の意思決定まで行う「完全自律型」,に分類される. 現時点ではAIが必ずしも正確な判断を下せないため,「半自律型」の兵器の開発が主流である. しかし, 上手くいかなかったようだが, ロシアは「自律型」のロボットを実戦配備したことがある. AIの兵器利用は今後どの方向に向かっていくのか. 米国に凋落の兆しが見える今, 世界の覇権争いを左右するAIの軍事利用の展開に今後目が離せそうにない.    
+
+\section{数式の書き方}
+
+\subsection{高校の数学}
+
+\begin{enumerate}
+
+\item \textgt{(ド・モルガンの法則)}
+集合$E$の部分集合$A,B \subseteq E$に対して,
+\[\overline{(A \cup B)} = \overline{A} \cap \overline{B} \]
+と
+\[\overline{(A \cap B)} = \overline{A} \cup \overline{B} \]
+が成り立つ. ただし, $\overline{S}$は集合$S$の補集合$E \setminus S$を表す.
+
+\item \textgt{(コーシー・シュワルツの不等式)}
+\[ \left( \sum_{i = 1}^{n} a_i^2 \right) \left( \sum_{i = 1}^ {n} b_i^2 \right) \geq \left( \sum_{i = 1}^{n} a_i b_i \right)^2. \]
+ベクトル$\bm{a},\bm{b}$と内積・を用いて,
+\[| \bm{a} | | \bm{b} | \geq | \bm{a}・\bm{b} | \]
+と書き換えることができる.
+
+\item \textgt{(加法定理)}
+
+\begin{itemize}
+\item $\sin(\theta + \varphi) = \sin \theta \cos \varphi + \cos \theta \sin \varphi.$  
+\item $\cos(\theta + \varphi) = \cos \theta \cos \varphi - \sin \theta \sin \varphi.$  
+\end{itemize}
+
+\end{enumerate}
+
+\subsection{数学３：解析}
+
+\begin{enumerate}
+
+\item 実数値関数$f$が\textgt{連続}であるとは, 任意の実数$x_0$に対して,
+\[\lim_{x \to x_0} f(x) = f(x_0) \]
+が成り立つことを言う. $\varepsilon $-$ \delta$論法で書くと,
+\[\forall x_0 \in \mathbf{R}, \forall \varepsilon > 0, \exists \delta > 0, \forall x \in \mathbf{R}, |x_0 - x| < \delta \Rightarrow |f(x_0) - f(x)| < \varepsilon \]
+となる.
+
+\item 実数値関数$f$が\textgt{一様連続}であるとは,
+\[\forall \varepsilon > 0, \exists \delta > 0, \forall x, y \in \mathbf{R}, |x - y| < \delta \Rightarrow |f(x) - f(y)| < \varepsilon \]
+を満たすときを言う.
+
+\end{enumerate}
+
+\subsection{数学４：線形代数}
+
+\begin{enumerate}
+
+\item $n$次正方行列$A$に対し, 次の５つは等価である.
+\begin{enumerate}
+
+\item $A$は正則 （逆行列$A^{-1}$が存在)
+
+\item  $\rank A = n$
+
+\item $\im A = \mathbf{R}^n$
+
+\item $\ker A = \{ \bm{0} \}$
+
+\item $\det A \neq 0$
+
+\end{enumerate}
+
+\item $n$次正方行列$A = (a_{ij})$の\textgt{行列式} $\det A$は,
+\[\det A = \sum_{\sigma \in S_n} \sgn(\sigma) \prod_{i=1}^{n}a_{i \sigma (i)} \]
+と定義される. ここで$S_n$は$n$個の置換全体, $\sgn(\sigma)$は置換$\sigma$の符号を
+表す.
+
+\end{enumerate}
+
+
+\end{document}
